@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Form from "./Form";
 
 function Project() {
     let navigate = useNavigate();
@@ -46,51 +46,12 @@ function Project() {
     //One htmlFor project summary
     //One htmlFor project url
     //One htmlFor project images if any
-    return <div className = "project" >
-        <
-        form className = "project-form"
-    onSubmit = { handleSubmit } >
-        <
-        div >
-        <
-        label htmlFor = "name" > Project Name: < /label> <
-        input autoComplete = "off"
-    className = "details"
-    onChange = { handleChange }
-    name = "pName"
-    type = "text"
-    value = { pName }
-    /> <
-    /div> <
-    div >
-        <
-        label htmlFor = "summary" > Project Summary: < /label> <
-        textarea className = "details"
-    rows = "15"
-    onChange = { handleChange }
-    name = "summary"
-    value = { summary }
-    /> <
-    /div> <
-    div >
-        <
-        label htmlFor = "url" > Project url: < /label> <
-        input autoCorrect = "off"
-    autoComplete = "off"
-    className = "details"
-    onChange = { handleChange }
-    name = "url"
-    value = { url }
-    /> <
-    /div> <
-    div >
-        <
-        Button type = "submit"
-    variant = "contained"
-    color = "success" > Add < /Button> <
-        /div> <
-        /form> <
-        /div> 
+    return <Form onsubmit = { handleSubmit }
+    onchange = { handleChange }
+    pName = { pName }
+    summary = { summary }
+    url = { url }
+    />
 }
 
 export default Project;

@@ -39,7 +39,7 @@ app.route("/projects") //This sends all the projects in the database to the clie
             }
         })
     })
-    .post((req, res) => {
+    .post((req, res) => { //This Creates a new document in the project collection
         const result = req.body
         console.log(result);
         Project.create({
@@ -50,7 +50,13 @@ app.route("/projects") //This sends all the projects in the database to the clie
         res.redirect("/projects");
     });
 
-
+app.route("/update/:id")
+    .get((req, res) => {
+        const id = req.params.id;
+        console.log(id);
+        // Project.findOne({_id: id}, )
+        res.send();
+    })
 
 
 app.listen(PORT, () => {

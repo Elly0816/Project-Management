@@ -4,7 +4,7 @@ import axios from "axios";
 export default function Projects() {
     const [projects, changeProjects] = useState([]);
 
-    useEffect(() => {
+    useEffect(() => { //Handles getting the projects from the database
         async function getProjects() {
             const result = await axios.get("http://localhost:5000/projects");
             const fromBackend = result.data;
@@ -27,12 +27,14 @@ export default function Projects() {
         th > Project Name < /th> <
         th > Project Summary < /th> <
         th > Project URL < /th> <
+        th > Update < /th> <
+        th > Delete < /th> <
         /tr> <
         /thead>
 
         <
         tbody > {
-            projects.map((project, index) => ( < tr key = { index } > < td > { project.pName } < /td> <
+            projects.map((project) => ( < tr key = { project._id } > < td > { project.pName } < /td> <
                 td > { project.Summary } < /td> <
                 td > { project.Url } < /td></tr > ))
         } <
