@@ -31,7 +31,7 @@ export default function Form(props) {
     function handleChange(e) {
         const { name, value } = e.target;
         if (name === "pName") {
-            setDetails({ pName: value, ...details })
+            setDetails({...details, pName: value })
         } else if (name === "summary") {
             setDetails({...details, summary: value })
         } else {
@@ -62,7 +62,7 @@ export default function Form(props) {
 
     }
 
-    console.log("From form");
+    console.log("from Form");
     console.log(`name: ${pName}
     url: ${url}
     summary: ${summary}
@@ -103,6 +103,7 @@ export default function Form(props) {
     className = "details"
     onChange = { handleChange }
     name = "url"
+    type = "text"
     value = { url }
     /> <
     /div> <
