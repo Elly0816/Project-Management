@@ -47,7 +47,7 @@ export default function Form(props) {
         console.log({ pName, summary, url });
         axios({
                 method: props.method,
-                url: `http://localhost:5000${props.route}/${props.id}`,
+                url: `http://localhost:5000${props.route}`,
                 data: { pName: pName, summary: summary, url: url }
             })
             .then((res) => { console.log(res) })

@@ -34,12 +34,13 @@ export default function UpdateProject() {
 
     }, []);
 
-    // console.log("From Update Project");
-    // console.log(pName, summary, url, _id);
+    const route = `/update/${_id}`
+        // console.log("From Update Project");
+        // console.log(pName, summary, url, _id);
 
     return <Form name = { pName }
     command = "UPDATE"
-    route = "/update"
+    route = { route }
     method = "post"
     summary = { summary }
     id = { _id }
