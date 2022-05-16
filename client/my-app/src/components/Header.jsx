@@ -9,40 +9,50 @@ function Header() {
         <
         div className = "block-left" >
         <
-        a href = "/" >
-        <
         Typography sx = {
-            { fontSize: "larger", justifyContent: "left" } } > Project Management < /Typography> <
-        /a> <
-        /div> <
-        div className = "block-right" >
+            { fontSize: "larger", justifyContent: "left" } } >
         <
-        a href = "/contact" >
-        <
-        Typography sx = {
-            { minWidth: 100, justifyContent: "right" } } > Contact < /Typography> <
-        /a>
+        a href = "/"
+    style = {
+            { textDecoration: 'none' } } > Project Management < /a> <
+        /Typography> <
+        /div>
 
     <
-    a href = "/about" >
+    div className = "block-right" >
         <
         Typography sx = {
-            { minWidth: 100, justifyContent: "right" } } > About < /Typography> <
-        /a>
+            { minWidth: 100, justifyContent: "right" } } >
+        <
+        a href = "/contact"
+    style = {
+            { textDecoration: 'none' } } > Contact < /a> <
+        /Typography>
 
     <
-    a href = "/projects" >
+    Typography sx = {
+            { minWidth: 100, justifyContent: "right" } } >
         <
-        Typography sx = {
-            { minWidth: 100, justifyContent: "right" } } > Projects < /Typography> <
-        /a>
+        a href = "/about"
+    style = {
+            { textDecoration: 'none' } } > About < /a></Typography >
 
-    <
-    a href = "/add" >
         <
         Typography sx = {
-            { minWidth: 100, justifyContent: "right" } } > Add Project < /Typography> <
-        /a> <
+            { minWidth: 100, justifyContent: "right" } } >
+        <
+        a href = "/projects"
+    style = {
+            { textDecoration: 'none' } } > Projects < /a></Typography >
+
+        <
+        Typography sx = {
+            { minWidth: 100, justifyContent: "right" } } >
+        <
+        a href = "/add"
+    style = {
+            { textDecoration: 'none' } } > Add Project < /a></Typography >
+        <
         /div>
 
 

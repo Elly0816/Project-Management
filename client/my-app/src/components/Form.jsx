@@ -1,25 +1,88 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function Form(props) {
 
+    const [details, setDetails] = useState({
+        pName: "",
+        summary: "",
+        url: ""
+    });
+
+    const { pName, summary, url } = details;
+
+    useEffect(() => {
+        if (props.name && props.summary && props.url) {
+            setDetails({...details,
+                pName: props.name,
+                summary: props.summary,
+                url: props.url
+            });
+        }
+
+    }, [props.name, props.url, props.summary]);
 
 
-    return <div className = "project" >
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+        if (name === "pName") {
+            setDetails({ pName: value, ...details })
+        } else if (name === "summary") {
+            setDetails({...details, summary: value })
+        } else {
+            setDetails({...details, url: value })
+        }
+        console.log(details.pName, details.summary, details.url);
+    }
+
+    let navigate = useNavigate();
+
+
+    function handleSubmit(e) {
+        console.log({ pName, summary, url });
+        axios({
+                method: props.method,
+                url: `http://localhost:5000${props.route}/${props.id}`,
+                data: { pName: pName, summary: summary, url: url }
+            })
+            .then((res) => { console.log(res) })
+            .catch((err) => console.log(err));
+        setDetails({
+            pName: "",
+            summary: "",
+            url: ""
+        });
+        e.preventDefault();
+        navigate("/projects");
+
+    }
+
+    console.log("From form");
+    console.log(`name: ${pName}
+    url: ${url}
+    summary: ${summary}
+    id: ${props.id}`);
+
+
+    return <div className = "form" >
         <
         form className = "project-form"
-    onSubmit = { props.onsubmit } >
+    onSubmit = { handleSubmit } >
         <
         div >
         <
         label htmlFor = "name" > Project Name: < /label> <
         input autoComplete = "off"
     className = "details"
-    onChange = { props.handlechange }
+    onChange = { handleChange }
     name = "pName"
     type = "text"
-    value = { props.pName }
+    value = { pName }
     /> <
     /div> <
     div >
@@ -27,9 +90,9 @@ export default function Form(props) {
         label htmlFor = "summary" > Project Summary: < /label> <
         textarea className = "details"
     rows = "15"
-    onChange = { props.handlechange }
+    onChange = { handleChange }
     name = "summary"
-    value = { props.summary }
+    value = { summary }
     /> <
     /div> <
     div >
@@ -38,16 +101,16 @@ export default function Form(props) {
         input autoCorrect = "off"
     autoComplete = "off"
     className = "details"
-    onChange = { props.handlechange }
+    onChange = { handleChange }
     name = "url"
-    value = { props.url }
+    value = { url }
     /> <
     /div> <
     div >
         <
         Button type = "submit"
     variant = "contained"
-    color = "success" > Add < /Button> <
+    color = "success" > { props.command } < /Button> <
         /div> <
         /form> <
         /div> 

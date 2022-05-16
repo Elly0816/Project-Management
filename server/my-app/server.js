@@ -30,10 +30,9 @@ app.route("/")
 
 app.route("/projects") //This sends all the projects in the database to the client
     .get((req, res) => {
-        Project.find({}, (result, error) => {
+        Project.find({}, (error, result) => {
             if (error) {
                 console.log(error);
-                res.send(error);
             } else {
                 res.send(result);
             }
@@ -41,7 +40,6 @@ app.route("/projects") //This sends all the projects in the database to the clie
     })
     .post((req, res) => { //This Creates a new document in the project collection
         const result = req.body
-        console.log(result);
         Project.create({
             pName: result.pName,
             Summary: result.summary,
@@ -53,9 +51,43 @@ app.route("/projects") //This sends all the projects in the database to the clie
 app.route("/update/:id")
     .get((req, res) => {
         const id = req.params.id;
-        console.log(id);
-        // Project.findOne({_id: id}, )
-        res.send();
+        Project.findOne({ _id: id }, (error, project) => {
+            if (error) {
+                console.log(error);
+            } else {
+                res.send(project);
+            }
+        });
+    })
+    .post((req, res) => {
+        const id = req.params.id;
+        console.log(req.body);
+        const { pName, summary, url } = req.body;
+        Project.findByIdAndUpdate(id, {
+            pName: pName,
+            Summary: summary,
+            Url: url
+        }, (error, project) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(project);
+                res.send(project);
+            }
+        });
+    });
+
+app.route("/delete/:id")
+    .get((req, res) => {
+        const { id } = req.params;
+        Project.findByIdAndDelete(id, (error, result) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(result);
+                res.send(result);
+            }
+        });
     })
 
 

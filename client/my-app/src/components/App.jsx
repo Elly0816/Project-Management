@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "../pages/About";
-import AddProject from "../pages/AddProject";
+import AddProject from "./AddProject";
 import Contact from "../pages/Contact";
 import Projects from "../pages/Projects";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
+import UpdateProject from "./UpdateProject";
 
 
 
 function App() {
-
 
     return ( < div >
         <
@@ -34,6 +34,9 @@ function App() {
         /> <
         Route path = "/projects"
         element = { < Projects / > }
+        /> <
+        Route path = "/update/:id"
+        element = { < UpdateProject / > }
         /> <
         /Routes> <
         /Router> <

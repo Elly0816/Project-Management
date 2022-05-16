@@ -1,57 +1,53 @@
-import React, { useState } from "react";
+import React from "react";
+import { Card, Button } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import Form from "./Form";
 
-function Project() {
-    let navigate = useNavigate();
 
-    const [{ pName, summary, url }, setDetails] = useState({
-        pName: "",
-        summary: "",
-        url: ""
-    });
 
-    function handleChange(e) {
-        const { name, value } = e.target;
-        if (name === "pName") {
-            setDetails({ pName: value, summary: summary, url: url })
-        } else if (name === "summary") {
-            setDetails({ pName: pName, summary: value, url: url })
-        } else {
-            setDetails({ pName: pName, summary: summary, url: value })
-        }
+export default function Project(props) {
+
+    // style={{justifyContent: "center"}}
+    const updateUrl = `/update/${props.id}`;
+    const deleteUrl = `http://localhost:5000/delete/${props.id}`;
+
+    function deleteProject() {
+        axios.get(deleteUrl);
     }
 
-    function handleSubmit(e) {
-        console.log({ pName, summary, url });
-        axios({
-                method: 'post',
-                url: "http://localhost:5000/projects",
-                data: { pName: pName, summary: summary, url: url }
-            })
-            .then((res) => { console.log(res) })
-            .catch((err) => console.log(err));
-        setDetails({
-            pName: "",
-            summary: "",
-            url: ""
-        });
-        navigate("/projects");
-        e.preventDefault();
+
+    return ( < div >
+        <
+        Card style = {
+            { width: '18rem' } } >
+        <
+        Card.Body >
+        <
+        Card.Title > { props.name } < /Card.Title> <
+        Card.Text > { props.summary } <
+        /Card.Text> <
+        Button variant = "primary"
+        href = { props.url } > { props.url } < /Button> <
+        /Card.Body> <
+        Card.Body >
+        <
+        Card.Link href = { updateUrl }
+        style = {
+            {
+                textDecoration: 'none',
+                color: 'black'
+            }
+        } > Update < /Card.Link> <
+        Card.Link href = ""
+        onClick = { deleteProject }
+        style = {
+            {
+                textDecoration: 'none',
+                color: 'black'
+            }
+        } > Delete < /Card.Link> <
+        /Card.Body> <
+        /Card> <
+        br / >
+        <
+        /div>)
     }
-
-    // Create 4 entries
-    //One htmlFor project name
-    //One htmlFor project summary
-    //One htmlFor project url
-    //One htmlFor project images if any
-    return <Form onsubmit = { handleSubmit }
-    onchange = { handleChange }
-    pName = { pName }
-    summary = { summary }
-    url = { url }
-    />
-}
-
-export default Project;

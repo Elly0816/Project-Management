@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import Project from "../components/Project";
 
 export default function Projects() {
     const [projects, changeProjects] = useState([]);
@@ -15,36 +16,26 @@ export default function Projects() {
         getProjects();
     }, []);
 
-    return ( < div >
-        <
-        h1 > Projects < /h1> <
-        table >
-        <
-        thead >
-        <
-        tr >
-        <
-        th > Project Name < /th> <
-        th > Project Summary < /th> <
-        th > Project URL < /th> <
-        th > Update < /th> <
-        th > Delete < /th> <
-        /tr> <
-        /thead>
+    return ( < div className = 'project-head' >
 
-        <
-        tbody > {
-            projects.map((project) => ( < tr key = { project._id } > < td > { project.pName } < /td> <
-                td > { project.Summary } < /td> <
-                td > { project.Url } < /td></tr > ))
-        } <
-        /tbody>
+            <
+            div >
+            <
+            h1 style = {
+                { textAlign: "center", paddingBottom: "10px" } } > Projects < /h1> <
+            div className = 'projects' > {
+                (projects.length > 0) ?
+                projects.map(project => < Project key = { project._id }
+                    id = { project._id }
+                    summary = { project.Summary }
+                    url = { project.Url }
+                    name = { project.pName }
+                    />): < h5 > You have no Projects yet < /h5>
+                } <
+                /div> <
+                /div>
 
-        <
-        /table>
+                <
+                /div>)
 
-
-        <
-        /div>)
-
-    }
+            }
