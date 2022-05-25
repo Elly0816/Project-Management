@@ -7,46 +7,54 @@ import axios from "axios";
 export default function Project(props) {
 
     // style={{justifyContent: "center"}}
-    const updateUrl = `/update/${props.id}`;
+    // const updateUrl = `/update/${props.id}`;
     const deleteUrl = `http://localhost:5000/delete/${props.id}`;
 
     function deleteProject() {
         axios.get(deleteUrl);
+        props.getNew()
+    }
+
+    function update() {
+        props.getUpdate(props.id)
     }
 
 
     return ( < div >
         <
         Card style = {
-            { width: '18rem' } } >
+            { width: '18rem' }
+        } >
         <
         Card.Body >
         <
-        Card.Title > { props.name } < /Card.Title> <
+        Card.Title > { props.name } < /Card.Title>  <
         Card.Text > { props.summary } <
-        /Card.Text> <
-        Button variant = "primary"
-        href = { props.url } > { props.url } < /Button> <
+        /Card.Text>  <
+        Card.Link style = {
+            { color: 'black', textDecoration: 'none' } }
+        href = { props.url } > { props.url } < /Card.Link> <
         /Card.Body> <
         Card.Body >
         <
-        Card.Link href = { updateUrl }
+        Button variant = "info"
+        onClick = { update }
         style = {
             {
                 textDecoration: 'none',
                 color: 'black'
             }
-        } > Update < /Card.Link> <
-        Card.Link href = ""
+        } > Update < /Button>  <
+        Button variant = "danger"
         onClick = { deleteProject }
         style = {
             {
                 textDecoration: 'none',
                 color: 'black'
             }
-        } > Delete < /Card.Link> <
-        /Card.Body> <
-        /Card> <
+        } > Delete < /Button>  <
+        /Card.Body>  <
+        /Card>  <
         br / >
         <
         /div>)

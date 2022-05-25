@@ -1,48 +1,94 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "../pages/About";
-import AddProject from "./AddProject";
 import Contact from "../pages/Contact";
-import Projects from "../pages/Projects";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
-import UpdateProject from "./UpdateProject";
+import Form from "./Form";
+import Project from "./Project";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Projects from "./Projects";
 
 
 
 function App() {
+    //Fetch the projects from the database and save the projects state
+    const server = "http://localhost:5000"
 
-    return ( < div >
-        <
-        Header / >
-        <
-        Router >
-        <
-        Routes >
-        <
-        Route path = "/"
-        element = { < Home / > }
-        /> <
-        Route path = "/add"
-        element = { < AddProject / > }
-        /> <
-        Route path = "/about"
-        element = { < About / > }
-        /> <
-        Route path = "/contact"
-        element = { < Contact / > }
-        /> <
-        Route path = "/projects"
-        element = { < Projects / > }
-        /> <
-        Route path = "/update/:id"
-        element = { < UpdateProject / > }
-        /> <
-        /Routes> <
-        /Router> <
-        Footer / >
-        <
-        /div>);
+    const [projects, changeProjects] = useState([]);
+
+    //get all the projects from the database when the projects component mounts
+    useEffect(() => {
+        async function getData() {
+            await axios.get(`${server}/projects`)
+                .then((res) => {
+                    changeProjects([...res.data]);
+                })
+                .catch((err) => console.log(err));
+        }
+        getData();
+        console.log(projects)
+    }, [])
+
+
+    const [toUpdate, setUpdate] = useState();
+
+
+    //Functions for update
+    //Get request to update route should populate the form with project details
+    async function getUpdate(id) {
+        await axios.get(`${server}/update/${id}`)
+            .then(res => { setUpdate(res.data) })
+    };
+
+
+    //Changes the toUpdate state back to undefined
+    function toAdd() {
+        setUpdate();
     }
 
-    export default App;
+    // function to get new projects from the database after every operation
+    function getNew() {
+        axios.get(`${server}/projects`)
+            .then(res => {
+                function changed() {
+                    if (JSON.stringify(projects) === JSON.stringify(res.data)) {
+                        return false
+                    } else {
+                        return true
+                    }
+                };
+                changed() && changeProjects([...res.data])
+            })
+            .catch(err => console.log(err))
+    }
+
+    return ( < div >
+            <
+            Header / > {
+                toUpdate ? < Form method = 'post'
+                summary = { toUpdate.Summary }
+                route = { `${server}/update/${toUpdate._id}` }
+                url = { toUpdate.Url }
+                name = { toUpdate.pName }
+                command = "Update"
+                toAdd = { toAdd }
+                getNew = { getNew }
+
+                /> : <Form command="Add" 
+                method = "post"
+                route = { `${server}/projects` }
+                toAdd = { toAdd }
+                getNew = { getNew }
+                />} <
+                Projects getNew = { getNew }
+                projects = { projects }
+                server = { server }
+                getUpdate = { getUpdate }
+                /> <
+                Footer / >
+                <
+                /div>);
+            }
+
+            export default App;

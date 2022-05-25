@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 
 
@@ -37,36 +37,36 @@ export default function Form(props) {
         } else {
             setDetails({...details, url: value })
         }
-        console.log(details.pName, details.summary, details.url);
+        // console.log(details.pName, details.summary, details.url);
     }
 
-    let navigate = useNavigate();
-
+    // let navigate = useNavigate();
 
     function handleSubmit(e) {
-        console.log({ pName, summary, url });
         axios({
                 method: props.method,
-                url: `http://localhost:5000${props.route}`,
+                url: props.route,
                 data: { pName: pName, summary: summary, url: url }
             })
-            .then((res) => { console.log(res) })
-            .catch((err) => console.log(err));
+            .then((res) => { console.log(res);
+                props.getNew(); })
+            .catch((err) => console.log(err))
         setDetails({
             pName: "",
             summary: "",
             url: ""
         });
+        props.toAdd();
         e.preventDefault();
-        navigate("/projects");
+        // navigate("/projects");
 
     }
 
-    console.log("from Form");
-    console.log(`name: ${pName}
-    url: ${url}
-    summary: ${summary}
-    id: ${props.id}`);
+    // console.log("from Form");
+    // console.log(`name: ${pName}
+    // url: ${url}
+    // summary: ${summary}
+    // id: ${props.id}`);
 
 
     return <div className = "form" >
@@ -76,28 +76,28 @@ export default function Form(props) {
         <
         div >
         <
-        label htmlFor = "name" > Project Name: < /label> <
+        label htmlFor = "name" > Project Name: < /label>  <
         input autoComplete = "off"
     className = "details"
     onChange = { handleChange }
     name = "pName"
     type = "text"
     value = { pName }
-    /> <
-    /div> <
+    />  <
+    /div>  <
     div >
         <
-        label htmlFor = "summary" > Project Summary: < /label> <
+        label htmlFor = "summary" > Project Summary: < /label>  <
         textarea className = "details"
     rows = "15"
     onChange = { handleChange }
     name = "summary"
     value = { summary }
-    /> <
-    /div> <
+    />  <
+    /div>  <
     div >
         <
-        label htmlFor = "url" > Project url: < /label> <
+        label htmlFor = "url" > Project url: < /label>  <
         input autoCorrect = "off"
     autoComplete = "off"
     className = "details"
@@ -105,14 +105,14 @@ export default function Form(props) {
     name = "url"
     type = "text"
     value = { url }
-    /> <
-    /div> <
+    />  <
+    /div>  <
     div >
         <
         Button type = "submit"
     variant = "contained"
-    color = "success" > { props.command } < /Button> <
-        /div> <
-        /form> <
+    color = "success" > { props.command } < /Button>  <
+        /div>  <
+        /form>  <
         /div> 
 }
