@@ -92,12 +92,7 @@ textarea {
 
 /*Styles for the project card component*/
 
-.project-head {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 5%;
-}
-
-body.projects {
-    justify-content: center;
+.project {
+    margin: 10px;
+    float: left;
 }

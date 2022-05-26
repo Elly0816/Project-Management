@@ -27,6 +27,17 @@ function Header() {
             { minWidth: 100, justifyContent: "right" }
         } >
         <
+        a href = "/projects"
+    style = {
+            { textDecoration: 'none' }
+        } > Projects < /a>  <
+        /Typography>
+
+    <
+    Typography sx = {
+            { minWidth: 100, justifyContent: "right" }
+        } >
+        <
         a href = "/contact"
     style = {
             { textDecoration: 'none' }

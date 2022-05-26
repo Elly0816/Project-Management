@@ -1,94 +1,38 @@
-import About from "../pages/About";
-import Contact from "../pages/Contact";
+import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
-import Form from "./Form";
-import Project from "./Project";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Projects from "./Projects";
+import Contact from "../pages/Contact";
+import About from "../pages/About";
+import EnterProject from "./EnterProject";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+export default function App() {
 
 
-
-function App() {
-    //Fetch the projects from the database and save the projects state
-    const server = "http://localhost:5000"
-
-    const [projects, changeProjects] = useState([]);
-
-    //get all the projects from the database when the projects component mounts
-    useEffect(() => {
-        async function getData() {
-            await axios.get(`${server}/projects`)
-                .then((res) => {
-                    changeProjects([...res.data]);
-                })
-                .catch((err) => console.log(err));
-        }
-        getData();
-        console.log(projects)
-    }, [])
-
-
-    const [toUpdate, setUpdate] = useState();
-
-
-    //Functions for update
-    //Get request to update route should populate the form with project details
-    async function getUpdate(id) {
-        await axios.get(`${server}/update/${id}`)
-            .then(res => { setUpdate(res.data) })
-    };
-
-
-    //Changes the toUpdate state back to undefined
-    function toAdd() {
-        setUpdate();
-    }
-
-    // function to get new projects from the database after every operation
-    function getNew() {
-        axios.get(`${server}/projects`)
-            .then(res => {
-                function changed() {
-                    if (JSON.stringify(projects) === JSON.stringify(res.data)) {
-                        return false
-                    } else {
-                        return true
-                    }
-                };
-                changed() && changeProjects([...res.data])
-            })
-            .catch(err => console.log(err))
-    }
-
-    return ( < div >
-            <
-            Header / > {
-                toUpdate ? < Form method = 'post'
-                summary = { toUpdate.Summary }
-                route = { `${server}/update/${toUpdate._id}` }
-                url = { toUpdate.Url }
-                name = { toUpdate.pName }
-                command = "Update"
-                toAdd = { toAdd }
-                getNew = { getNew }
-
-                /> : <Form command="Add" 
-                method = "post"
-                route = { `${server}/projects` }
-                toAdd = { toAdd }
-                getNew = { getNew }
-                />} <
-                Projects getNew = { getNew }
-                projects = { projects }
-                server = { server }
-                getUpdate = { getUpdate }
-                /> <
-                Footer / >
-                <
-                /div>);
-            }
-
-            export default App;
+    return <div >
+        <
+        Header / >
+        <
+        Router >
+        <
+        Routes >
+        <
+        Route path = "/"
+    element = { < Home / > }
+    /> <
+    Route path = "/projects"
+    element = { < EnterProject / > }
+    /> <
+    Route path = "/contact"
+    element = { < Contact / > }
+    /> <
+    Route path = "/about"
+    element = { < About / > }
+    /> <
+    /Routes> <
+    /Router> <
+    Footer / >
+        <
+        /div>
+}

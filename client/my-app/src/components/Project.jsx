@@ -20,7 +20,7 @@ export default function Project(props) {
     }
 
 
-    return ( < div >
+    return ( < div className = "project" >
         <
         Card style = {
             { width: '18rem' }
