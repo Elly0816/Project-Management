@@ -6,8 +6,6 @@ import axios from "axios";
 
 export default function Project(props) {
 
-    // style={{justifyContent: "center"}}
-    // const updateUrl = `/update/${props.id}`;
     const deleteUrl = `http://localhost:5000/delete/${props.id}`;
 
     function deleteProject() {

@@ -1,8 +1,3 @@
-import About from "../pages/About";
-import Contact from "../pages/Contact";
-import Header from "./Header";
-import Footer from "./Footer";
-import Home from "./Home";
 import Form from "./Form";
 import { useState, useEffect } from "react";
 import axios from "axios";

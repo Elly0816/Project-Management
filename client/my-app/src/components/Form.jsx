@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-
 
 
 export default function Form(props) {
@@ -37,10 +35,8 @@ export default function Form(props) {
         } else {
             setDetails({...details, url: value })
         }
-        // console.log(details.pName, details.summary, details.url);
     }
 
-    // let navigate = useNavigate();
 
     function handleSubmit(e) {
         axios({
@@ -58,15 +54,9 @@ export default function Form(props) {
         });
         props.toAdd();
         e.preventDefault();
-        // navigate("/projects");
 
     }
 
-    // console.log("from Form");
-    // console.log(`name: ${pName}
-    // url: ${url}
-    // summary: ${summary}
-    // id: ${props.id}`);
 
 
     return <div className = "form" >

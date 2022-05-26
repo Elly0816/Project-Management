@@ -1,13 +1,7 @@
-import React, { useEffect } from "react";
-// import axios from "axios";
+import React from "react";
 
 
 export default function Home() {
-
-    // useEffect(() => {
-    //     axios.get("http://localhost:5000");
-    // }, []);
-
 
     return <div className = "home" >
         <
