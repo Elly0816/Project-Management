@@ -1,0 +1,1 @@
+This project management app includes a server; built with node and express and a client; built with react
