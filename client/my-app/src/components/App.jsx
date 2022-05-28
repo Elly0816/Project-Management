@@ -8,9 +8,8 @@ import EnterProject from "./EnterProject";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 export default function App() {
-
-
-    return <div >
+    return ( <
+        div >
         <
         Header / >
         <
@@ -19,20 +18,21 @@ export default function App() {
         Routes >
         <
         Route path = "/"
-    element = { < Home / > }
-    /> <
-    Route path = "/projects"
-    element = { < EnterProject / > }
-    /> <
-    Route path = "/contact"
-    element = { < Contact / > }
-    /> <
-    Route path = "/about"
-    element = { < About / > }
-    /> <
-    /Routes> <
-    /Router> <
-    Footer / >
+        element = { < Home / > }
+        />{" "} <
+        Route path = "/projects"
+        element = { < EnterProject / > }
+        />{" "} <
+        Route path = "/contact"
+        element = { < Contact / > }
+        />{" "} <
+        Route path = "/about"
+        element = { < About / > }
+        />{" "} <
+        /Routes>{" "} <
+        /Router>{" "} <
+        Footer / >
         <
         /div>
+    );
 }

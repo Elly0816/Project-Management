@@ -3,9 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 function Header() {
-
-
-    return <Box className = "header" >
+    return ( < Box className = "header" >
         <
         div className = "block-left" >
         <
@@ -14,51 +12,52 @@ function Header() {
         } >
         <
         a href = "/"
-    style = {
-            { textDecoration: 'none' }
-        } > Project Management < /a>  <
+        style = {
+            { textDecoration: "none" }
+        } >
+        Project Management < /a>  <
         /Typography>  <
         /div>
 
-    <
-    div className = "block-right" >
+        <
+        div className = "block-right" >
         <
         Typography sx = {
             { minWidth: 100, justifyContent: "right" }
         } >
         <
         a href = "/projects"
-    style = {
-            { textDecoration: 'none' }
-        } > Projects < /a>  <
-        /Typography>
-
-    <
-    Typography sx = {
+        style = {
+            { textDecoration: "none" }
+        } >
+        Projects <
+        /a>  <
+        /Typography>  <
+        Typography sx = {
             { minWidth: 100, justifyContent: "right" }
         } >
         <
         a href = "/contact"
-    style = {
-            { textDecoration: 'none' }
-        } > Contact < /a>  <
-        /Typography>
-
-    <
-    Typography sx = {
+        style = {
+            { textDecoration: "none" }
+        } >
+        Contact <
+        /a>  <
+        /Typography>  <
+        Typography sx = {
             { minWidth: 100, justifyContent: "right" }
         } >
         <
         a href = "/about"
-    style = {
-            { textDecoration: 'none' }
-        } > About < /a> <
-        /Typography> <
-        /div>
-
-
-    <
-    /Box>
+        style = {
+            { textDecoration: "none" }
+        } >
+        About <
+        /a>  <
+        /Typography>  <
+        /div>  <
+        /Box>
+    );
 }
 
 export default Header;
